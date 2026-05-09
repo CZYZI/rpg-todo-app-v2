@@ -147,7 +147,6 @@ export async function generatePrioritySuggestions(
     throw new Error('无法解析AI响应');
   } catch (error) {
     console.error('[Qwen] 优先级推荐失败:', error);
-    // 返回默认顺序
     return {
       order: tasks.map((_, i) => i + 1),
       reasons: tasks.map(() => '按默认顺序执行'),
@@ -180,7 +179,6 @@ export async function generateTaskDecomposition(
     throw new Error('无法解析AI响应');
   } catch (error) {
     console.error('[Qwen] 任务分解失败:', error);
-    // 返回默认分解
     return ['准备阶段', '执行阶段', '完成阶段'];
   }
 }
@@ -210,13 +208,12 @@ export async function generateDailyPlan(
     throw new Error('无法解析AI响应');
   } catch (error) {
     console.error('[Qwen] 计划生成失败:', error);
-    // 返回默认计划（选择前3个任务或总时间内的任务）
     const selected = tasks
       .slice(0, 3)
       .map((_, i) => i + 1);
     return {
       selected,
-      plan: '今日计划：按顺序完成 selectedTasks.map(i => tasks[i-1].name).join('、')}`,
+      plan: `今日计划：按顺序完成 ${tasks.slice(0, 3).map(t => t.name).join('、')}`,
     };
   }
 }
@@ -244,7 +241,6 @@ export async function analyzeTaskPatterns(
     throw new Error('无法解析AI响应');
   } catch (error) {
     console.error('[Qwen] 模式分析失败:', error);
-    // 返回默认分析
     return {
       patterns: ['暂无足够数据进行分析'],
       suggestions: ['继续完成任务以积累数据'],

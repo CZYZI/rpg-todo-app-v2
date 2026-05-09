@@ -3,7 +3,7 @@ import { TimeOfDay } from '../utils/timeOfDay';
 
 /** 世界观详细描述（用于 prompt） */
 const WORLDVIEW_GUIDES: Record<string, string> = {
-  medival: '中世纪奇幻世界（骑士、巨龙、魔法、城堡、精灵、矮人、魔物、圣殿、遗迹）',
+  medieval: '中世纪奇幻世界（骑士、巨龙、魔法、城堡、精灵、矮人、魔物、圣殿、遗迹）',
   cyberpunk: '赛博朋克世界（黑客、机械义体、霓虹灯、暗网、AI、巨型财阀、飞行器、虚拟空间）',
   modern: '现代冒险世界（特工、秘密组织、未知遗迹、高科技装备、全球任务、隐藏关卡）',
 };
@@ -70,7 +70,7 @@ export function buildTaskPrompt(params: BuildTaskPromptParams): string {
  */
 export function buildPriorityPrompt(tasks: Array<{ name: string; difficulty: string; duration: number }>): string {
   const taskList = tasks.map((t, i) => `${i + 1}. ${t.name} (难度: ${t.difficulty}, 预计: ${t.duration}分钟)`).join('\n');
-  
+
   return `你是一个任务优先级分析专家。请分析以下待办任务，给出合理的执行顺序建议。
 
 【任务列表】
@@ -108,7 +108,7 @@ export function buildDailyPlanPrompt(
 ): string {
   const taskList = tasks.map((t, i) => `${i + 1}. ${t.name} (难度: ${t.difficulty}, 预计: ${t.duration}分钟)`).join('\n');
   const worldviewGuide = WORLDVIEW_GUIDES[worldview] || '';
-  
+
   return `你是一个智能日程规划师。请根据可用时间，从任务列表中选择合适的任务制定今日计划。
 
 【可用时间】${availableTime}分钟
@@ -129,7 +129,7 @@ ${taskList}
  */
 export function buildPatternAnalysisPrompt(completedTasks: Array<{ name: string; difficulty: string; duration: number; completedAt: string }>): string {
   const taskList = completedTasks.map((t, i) => `${i + 1}. ${t.name} (难度: ${t.difficulty}, 时长: ${t.duration}分钟, 完成于: ${t.completedAt})`).join('\n');
-  
+
   return `你是一个行为模式分析专家。请分析以下已完成的任务，发现用户的任务完成模式。
 
 【已完成任务】
@@ -179,7 +179,7 @@ const TASK_KEYWORD_TEMPLATES: Record<string, Record<string, string[]>> = {
   },
   // 运动/健身
   '运动|健身|跑步|锻炼|游泳|打球': {
-    medival: ['前往竞技场，完成骑士体能试炼，奖励{X}积分', '攀登龙脊山脉，磨炼战士体魄，奖励{X}积分'],
+    medieval: ['前往竞技场，完成骑士体能试炼，奖励{X}积分', '攀登龙脊山脉，磨炼战士体魄，奖励{X}积分'],
     cyberpunk: ['启动神经链路，完成义体体能校准，奖励{X}积分', '穿越霓虹街区，参加地下跑酷竞赛，奖励{X}积分'],
     modern: ['前往秘密训练基地，完成特工体能考核，奖励{X}积分', '攀登未知山峰，完成极限挑战，奖励{X}积分'],
   },

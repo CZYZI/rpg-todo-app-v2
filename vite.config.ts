@@ -4,5 +4,5 @@ import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  base: '/rpg-todo-app-ai-enhanced/',
+  base: '/rpg-todo-app-v2/',
 });

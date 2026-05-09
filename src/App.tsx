@@ -29,7 +29,7 @@ function App() {
   }, [checkAndResetDaily, setTheme, currentTheme]);
 
   return (
-    <BrowserRouter basename="/rpg-todo-app-ai-enhanced">
+    <BrowserRouter basename="/rpg-todo-app-v2">
       <Routes>
         <Route
           path="/"
